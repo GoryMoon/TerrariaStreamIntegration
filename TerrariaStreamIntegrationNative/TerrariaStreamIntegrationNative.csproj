@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7</LangVersion>
+    <ProjectGuid>{4C10B193-F6DE-4AC2-B229-B73FC4682A86}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TerrariaStreamIntegration</RootNamespace>
+    <AssemblyName>TerrariaStreamIntegrationClient</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony, Version=1.2.0.1, Culture=neutral, PublicKeyToken=null">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Terraria\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Graphics">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Graphics\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Graphics.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Game">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Game\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Game.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.Xna.Framework.Xact">
+      <HintPath>C:\WINDOWS\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Xact\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Xact.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="Terraria, Version=1.4.0.4, Culture=neutral, PublicKeyToken=null">
+      <HintPath>C:\Program Files (x86)\Steam\steamapps\common\Terraria\Terraria.exe</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Humanizer.Core" Version="2.8.11" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="NLog" Version="4.7.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Actions\AddBuff.cs" />
+    <Compile Include="Actions\BaseAction.cs" />
+    <Compile Include="Actions\DropBombs.cs" />
+    <Compile Include="Actions\DropItem.cs" />
+    <Compile Include="Actions\FillMana.cs" />
+    <Compile Include="Actions\GiveItem.cs" />
+    <Compile Include="Actions\HealPlayer.cs" />
+    <Compile Include="Actions\LaunchFirework.cs" />
+    <Compile Include="Actions\SetTime.cs" />
+    <Compile Include="Actions\StartBloodMoon.cs" />
+    <Compile Include="Actions\StartEclipse.cs" />
+    <Compile Include="Actions\StartInvasion.cs" />
+    <Compile Include="Actions\SwitchLocation.cs" />
+    <Compile Include="Actions\ToggleBuff.cs" />
+    <Compile Include="BombUtils.cs" />
+    <Compile Include="DeathCounter.cs" />
+    <Compile Include="MyMod.cs" />
+    <Compile Include="PacketHandler.cs" />
+    <Compile Include="Packets\BuffPacket.cs" />
+    <Compile Include="Packets\DropItemlPacket.cs" />
+    <Compile Include="Packets\ManaHealPacket.cs" />
+    <Compile Include="Packets\SoundPacket.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Patches.cs" />
+    <Compile Include="Utils.cs" />
+    <Compile Include="ActionManager.cs" />
+    <Compile Include="IntegrationManager.cs" />
+    <Compile Include="Packets\BasePacket.cs" />
+    <Compile Include="Packets\IntegrationPacket.cs" />
+    <Compile Include="Packets\InternalPacket.cs" />
+    <Compile Include="Actions\MessageAction.cs" />
+    <Compile Include="Actions\SpawnNpc.cs" />
+    <Compile Include="Actions\DropStar.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Mod Include=".\bin\x86\debug\*.*" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  
+  <Target Name="BuildMod" AfterTargets="Build">
+    <Copy SourceFiles="@(Mod)" DestinationFolder="C:\Program Files (x86)\Steam\steamapps\common\Terraria\Mods\StreamIntegration" SkipUnchangedFiles="true" OverwriteReadOnlyFiles="true" />
+  </Target>
+</Project>

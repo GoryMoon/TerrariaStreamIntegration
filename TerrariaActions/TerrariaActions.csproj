@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{B46D29AD-1D6A-444C-81C8-2D1E17DA69C5}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>TerrariaActions</RootNamespace>
+        <AssemblyName>TerrariaActions</AssemblyName>
+        <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
+          <HintPath>..\..\StreamIntegrationApp\Newtonsoft.Json.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="StreamIntegrationApp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <HintPath>..\..\StreamIntegrationApp\StreamIntegrationApp.exe</HintPath>
+          <Private>False</Private>
+        </Reference>
+        <Reference Include="System" />
+        <Reference Include="System.Core" />
+        <Reference Include="System.Data" />
+        <Reference Include="System.Xml" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="AddBuff.cs" />
+        <Compile Include="BaseAction.cs" />
+        <Compile Include="DropBombs.cs" />
+        <Compile Include="DropItem.cs" />
+        <Compile Include="DropStar.cs" />
+        <Compile Include="FillMana.cs" />
+        <Compile Include="GiveItem.cs" />
+        <Compile Include="HealPlayer.cs" />
+        <Compile Include="LaunchFirework.cs" />
+        <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="SetTime.cs" />
+        <Compile Include="SpawnNpc.cs" />
+        <Compile Include="StartBloodMoon.cs" />
+        <Compile Include="StartEclipse.cs" />
+        <Compile Include="StartInvasion.cs" />
+        <Compile Include="SwitchLocation.cs" />
+        <Compile Include="TerrariaPatch.cs" />
+        <Compile Include="ToggleBuff.cs" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+    <Target Name="AfterBuild">
+        <Copy SourceFiles="./bin/Debug/TerrariaActions.dll" DestinationFolder="D:\Development\IntegrationModding\StreamIntegrationApp\Integrations\Terraria" />
+    </Target>
+
+</Project>
